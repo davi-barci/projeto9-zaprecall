@@ -1,15 +1,23 @@
+import { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import ContainerCards from './ContainerCards';
 import Footer from './Footer';
 import Title from './Title';
+import cards from './mock';
 
 
 export default function App() {
+  const [cardState, setCardState] = useState([...cards].fill(0));
+
   return (
     <>
       <GlobalStyle/>
       <Title/>
-      <ContainerCards/>
+      <ContainerCards 
+          cards={cards} 
+          cardState={cardState} 
+          setCardState={setCardState}
+      />
       <Footer/>
     </>
   );

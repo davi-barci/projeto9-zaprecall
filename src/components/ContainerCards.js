@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import QuestionCard from "./QuestionCard";
-import { NewCard } from "./QuestionCard";
+import { Card } from "./QuestionCard";
+import { CardOpen } from "./QuestionCard";
 
-export default function ContainerCards(){
+export default function ContainerCards(props){
     return (
         <Cards>
-            <QuestionCard index="1" />
-            <QuestionCard index="2" />
-            <QuestionCard index="3" />
-            <QuestionCard index="4" />
-            <QuestionCard index="5" />
-            <QuestionCard index="6" />
-            <QuestionCard index="7" />
-            <QuestionCard index="8" />
+            {props.cards.map((elem, index) => 
+            <QuestionCard 
+                key={index} 
+                index={index} 
+                pergunta={elem.question} 
+                resposta={elem.answer}
+                cardState = {props.cardState}
+                setCardState = {props.setCardState}
+            />)}
         </Cards>
     );
 }
@@ -25,7 +27,11 @@ const Cards = styled.div`
     flex-direction: column;
     align-items: center;
 
-    & ${NewCard}:nth-last-of-type(1){
+    & ${Card}:nth-last-of-type(1){
+        margin-bottom: 0px;
+    }
+
+    & ${CardOpen}:nth-last-of-type(1){
         margin-bottom: 0px;
     }
 `;
