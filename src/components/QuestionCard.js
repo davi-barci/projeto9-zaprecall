@@ -1,33 +1,51 @@
 import styled from "styled-components";
 import setaPlay from "../assets/seta_play.png";
+import iconeCerto from "../assets/icone_certo.png";
+import iconeErro from "../assets/icone_erro.png";
+import iconeQuase from "../assets/icone_quase.png";
 import setaVirar from "../assets/seta_virar.png";
 
 export default function QuestionCard(props){
 
+    const imagens = [setaPlay, iconeErro, iconeQuase, iconeCerto];
+
+    function changeState(state){
+        let cardArray = [...props.cardState];
+        cardArray[props.index] = state;
+        props.setCardState(cardArray);
+    }
+
+    function changeResult(result){
+        let cardArray = [...props.cardResult];
+        cardArray[props.index] = result;
+        props.setCardResult(cardArray);
+        changeState(0);
+    }
+
     if (props.cardState[props.index] === 0){
         return (
-            <Card> 
+            <Card result={props.cardResult[props.index]}> 
                 <p>{`Pergunta ${props.index + 1}`}</p> 
-                <img src={setaPlay}></img> 
+                <img src={imagens[props.cardResult[props.index]]} onClick={() => (props.cardResult[props.index] === 0) && changeState(1)}></img> 
             </Card>
         );
     }else if (props.cardState[props.index] === 1){
         return (
-            <CardOpen>
-                <p>{props.pergunte}</p>
+            <CardOpen state="1">
+                <p>{props.pergunta}</p>
                 <div>
-                    <img src={setaVirar}/>
+                    <img src={setaVirar} onClick={()=> changeState(2)}/>
                 </div>
             </CardOpen>
         );
     }else if (props.cardState[props.index] === 2){
         return (
-            <CardOpen>
+            <CardOpen state="2">
                 <p>{props.resposta}</p>
                 <div>
-                    <ButtonOption color="#FF3030">Não <br/> lembrei</ButtonOption>
-                    <ButtonOption color="#FF922E">Quase não lembrei</ButtonOption>
-                    <ButtonOption color="#2FBE34">Zap!</ButtonOption>
+                    <ButtonOption color="#FF3030" onClick={() => changeResult(1)}>Não <br/> lembrei</ButtonOption>
+                    <ButtonOption color="#FF922E" onClick={() => changeResult(2)}>Quase não lembrei</ButtonOption>
+                    <ButtonOption color="#2FBE34" onClick={() => changeResult(3)}>Zap!</ButtonOption>
                 </div>
             </CardOpen>
         );
@@ -48,17 +66,18 @@ export const Card = styled.div`
     p{
         width: 87px;
         height: 19px;
-        font-family: 'Recursive';
+        font-family: 'Recursive', sans-serif;;
         font-style: normal;
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: #333333;
+        color: ${props => (props.result === 0) ? "#333333" : (props.result === 1) ? "#FF3030" : (props.result === 2) ? "#FF922E" : "#2FBE34"};
         margin-left: 15px;
+        text-decoration-line: ${props => (props.result !== 0) ? "line-through" : "none"} ;
     }
 
     img{
-        width: 20px;
+        width: 23px;
         height: 23px;
         margin-right: 15px;
     }
@@ -82,7 +101,7 @@ export const CardOpen = styled.div`
         margin-bottom: 21.80px;
         word-wrap: break-word;
         overflow-y: auto;
-        font-family: 'Recursive';
+        font-family: 'Recursive',  sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
@@ -94,7 +113,7 @@ export const CardOpen = styled.div`
         width: 100%;
         height: 47.17px;
         display: flex;
-        justify-content: space-around;
+        justify-content: ${props => (props.state === "1") ? "flex-end" : "space-around"};
         align-items: center;
 
         img{
@@ -110,7 +129,7 @@ export const ButtonOption = styled.button`
     height: 37.17px;
     background-color: ${props => props.color};
     border-radius: 5px;
-    font-family: 'Recursive';
+    font-family: 'Recursive', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;

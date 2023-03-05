@@ -22,7 +22,7 @@ const ContainerFooter = styled.div`
 
     p{
         height: 22px;
-        font-family: 'Recursive';
+        font-family: 'Recursive', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;

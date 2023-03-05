@@ -8,6 +8,7 @@ import cards from './mock';
 
 export default function App() {
   const [cardState, setCardState] = useState([...cards].fill(0));
+  const [cardResult, setCardResult] = useState([...cards].fill(0));
 
   return (
     <>
@@ -17,6 +18,8 @@ export default function App() {
           cards={cards} 
           cardState={cardState} 
           setCardState={setCardState}
+          cardResult = {cardResult}
+          setCardResult = {setCardResult}
       />
       <Footer/>
     </>
