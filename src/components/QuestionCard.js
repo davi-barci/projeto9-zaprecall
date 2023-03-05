@@ -8,6 +8,7 @@ import setaVirar from "../assets/seta_virar.png";
 export default function QuestionCard(props){
 
     const imagens = [setaPlay, iconeErro, iconeQuase, iconeCerto];
+    const dataTestImagens = ["play-btn", "no-icon", "partial-icon", "zap-icon"];
 
     function changeState(state){
         let cardArray = [...props.cardState];
@@ -24,28 +25,28 @@ export default function QuestionCard(props){
 
     if (props.cardState[props.index] === 0){
         return (
-            <Card result={props.cardResult[props.index]}> 
-                <p>{`Pergunta ${props.index + 1}`}</p> 
-                <img src={imagens[props.cardResult[props.index]]} onClick={() => (props.cardResult[props.index] === 0) && changeState(1)}></img> 
+            <Card result={props.cardResult[props.index]} data-test="flashcard"> 
+                <p data-test="flashcard-text">{`Pergunta ${props.index + 1}`}</p> 
+                <img src={imagens[props.cardResult[props.index]]} onClick={() => (props.cardResult[props.index] === 0) && changeState(1)} data-test={dataTestImagens[props.cardResult[props.index]]}></img> 
             </Card>
         );
     }else if (props.cardState[props.index] === 1){
         return (
-            <CardOpen state="1">
-                <p>{props.pergunta}</p>
+            <CardOpen state="1" data-test="flashcard">
+                <p data-test="flashcard-text">{props.pergunta}</p>
                 <div>
-                    <img src={setaVirar} onClick={()=> changeState(2)}/>
+                    <img src={setaVirar} data-test="turn-btn" onClick={()=> changeState(2)}/>
                 </div>
             </CardOpen>
         );
     }else if (props.cardState[props.index] === 2){
         return (
-            <CardOpen state="2">
-                <p>{props.resposta}</p>
+            <CardOpen state="2" data-test="flashcard">
+                <p data-test="flashcard-text">{props.resposta}</p>
                 <div>
-                    <ButtonOption color="#FF3030" onClick={() => changeResult(1)}>Não <br/> lembrei</ButtonOption>
-                    <ButtonOption color="#FF922E" onClick={() => changeResult(2)}>Quase não lembrei</ButtonOption>
-                    <ButtonOption color="#2FBE34" onClick={() => changeResult(3)}>Zap!</ButtonOption>
+                    <ButtonOption data-test="no-btn" color="#FF3030" onClick={() => changeResult(1)}>Não <br/> lembrei</ButtonOption>
+                    <ButtonOption data-test="partial-btn" color="#FF922E" onClick={() => changeResult(2)}>Quase não lembrei</ButtonOption>
+                    <ButtonOption data-test="zap-btn" color="#2FBE34" onClick={() => changeResult(3)}>Zap!</ButtonOption>
                 </div>
             </CardOpen>
         );
@@ -85,7 +86,7 @@ export const Card = styled.div`
 
 export const CardOpen = styled.div`
     width: 300px;
-    height: 131px;
+    height: 177px;
     background-color: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
@@ -96,7 +97,7 @@ export const CardOpen = styled.div`
 
     p{
         width: 270px;
-        height: 44px;
+        height: 90px;
         margin-top: 18px;
         margin-bottom: 21.80px;
         word-wrap: break-word;

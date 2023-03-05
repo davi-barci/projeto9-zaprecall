@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function Footer(props){
     return (
-        <ContainerFooter>
+        <ContainerFooter data-test="footer">
             <p>{props.cardResult.filter(elem => elem !== 0).length}/{props.cardResult.length} CONCLUÍDOS</p>
         </ContainerFooter>
     );
