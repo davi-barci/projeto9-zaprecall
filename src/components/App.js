@@ -21,7 +21,9 @@ export default function App() {
           cardResult = {cardResult}
           setCardResult = {setCardResult}
       />
-      <Footer/>
+      <Footer
+          cardResult = {cardResult}
+      />
     </>
   );
 }
