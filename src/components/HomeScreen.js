@@ -7,7 +7,7 @@ export default function HomeScreen(props){
             <div>
                 <img src={logo}></img>
                 <p>ZapRecall</p>
-                <button onClick={() => props.setCurrentPage(1)}>Iniciar Recall!</button>
+                <button data-test="start-btn" onClick={() => props.setCurrentPage(1)}>Iniciar Recall!</button>
             </div>
         </ContainerHomeScreen>
     );

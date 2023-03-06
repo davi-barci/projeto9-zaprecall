@@ -5,6 +5,7 @@ import iconeQuase from "../assets/icone_quase.png";
 
 export default function Footer(props){
     const imagens = [iconeErro, iconeQuase, iconeCerto];
+    const dataTestImagens = ["no-icon", "partial-icon", "zap-icon"];
 
     function showFeedback(){
         if(props.lastResult.length === props.cardResult.length && props.cardResult.filter(elem => elem === 1).length === 0){
@@ -18,14 +19,14 @@ export default function Footer(props){
 
     return (
         <ContainerFooter data-test="footer" showFeedback={showFeedback()}>
-            {(showFeedback() === 0) ? <><FeedbackTitle>🥳 Parabéns!</FeedbackTitle> <FeedbackMessage>Você não esqueceu de <br/> nenhum flashcard!</FeedbackMessage></> 
-            : (showFeedback() === 1) ? <><FeedbackTitle>😢 Putz...</FeedbackTitle> <FeedbackMessage>Ainda faltam alguns... <br/> Mas não desanime!</FeedbackMessage></>
+            {(showFeedback() === 0) ? <><FeedbackTitle data-test="finish-text">🥳 Parabéns!</FeedbackTitle> <FeedbackMessage data-test="finish-text">Você não esqueceu de <br/> nenhum flashcard!</FeedbackMessage></> 
+            : (showFeedback() === 1) ? <><FeedbackTitle data-test="finish-text">😢 Putz...</FeedbackTitle> <FeedbackMessage data-test="finish-text">Ainda faltam alguns... <br/> Mas não desanime!</FeedbackMessage></>
             : <></>}
             <CountText>{props.cardResult.filter(elem => elem !== 0).length}/{props.cardResult.length} CONCLUÍDOS</CountText>
             {(props.lastResult.length !== 0) &&
                 <div>
                     {props.lastResult.map((elem, index) => (
-                        <img key={index} src={imagens[elem-1]}></img>
+                        <img key={index} src={imagens[elem-1]} data-test={dataTestImagens[elem-1]}></img>
                     ))}
                 </div>
             }
