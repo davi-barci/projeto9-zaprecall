@@ -4,27 +4,33 @@ import ContainerCards from './ContainerCards';
 import Footer from './Footer';
 import Title from './Title';
 import cards from './mock';
+import HomeScreen from './HomeScreen';
 
 
 export default function App() {
   const [cardState, setCardState] = useState([...cards].fill(0));
   const [cardResult, setCardResult] = useState([...cards].fill(0));
+  const [currentPage, setCurrentPage] = useState(0);
 
   return (
-    <>
+      <>
       <GlobalStyle/>
-      <Title/>
-      <ContainerCards 
-          cards={cards} 
-          cardState={cardState} 
-          setCardState={setCardState}
-          cardResult = {cardResult}
-          setCardResult = {setCardResult}
-      />
-      <Footer
-          cardResult = {cardResult}
-      />
-    </>
+      {(currentPage === 0) ? 
+        <HomeScreen setCurrentPage={setCurrentPage}/> : 
+        <>
+        <Title/>
+        <ContainerCards 
+            cards={cards} 
+            cardState={cardState} 
+            setCardState={setCardState}
+            cardResult = {cardResult}
+            setCardResult = {setCardResult}
+        />
+        <Footer
+            cardResult = {cardResult}
+        />
+        </>}
+      </>
   );
 }
 
