@@ -5,7 +5,7 @@ import { CardOpen } from "./QuestionCard";
 
 export default function ContainerCards(props){
     return (
-        <Cards>
+        <Cards showFeedback={props.lastResult.length === props.cardResult.length}>
             {props.cards.map((elem, index) => 
             <QuestionCard 
                 key={index} 
@@ -26,7 +26,7 @@ export default function ContainerCards(props){
 const Cards = styled.div`
     width: 100%;
     margin-top: 51px;
-    margin-bottom: 121px;
+    margin-bottom: ${props => (props.showFeedback) ? "178px" : "121px"};
     display: flex;
     flex-direction: column;
     align-items: center;

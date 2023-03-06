@@ -6,13 +6,26 @@ import iconeQuase from "../assets/icone_quase.png";
 export default function Footer(props){
     const imagens = [iconeErro, iconeQuase, iconeCerto];
 
+    function showFeedback(){
+        if(props.lastResult.length === props.cardResult.length && props.cardResult.filter(elem => elem === 1).length === 0){
+            return 0;
+        }else if(props.lastResult.length === props.cardResult.length && props.cardResult.filter(elem => elem === 1).length !== 0){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
     return (
-        <ContainerFooter data-test="footer">
-            <p>{props.cardResult.filter(elem => elem !== 0).length}/{props.cardResult.length} CONCLUÍDOS</p>
+        <ContainerFooter data-test="footer" showFeedback={showFeedback()}>
+            {(showFeedback() === 0) ? <><FeedbackTitle>🥳 Parabéns!</FeedbackTitle> <FeedbackMessage>Você não esqueceu de <br/> nenhum flashcard!</FeedbackMessage></> 
+            : (showFeedback() === 1) ? <><FeedbackTitle>😢 Putz...</FeedbackTitle> <FeedbackMessage>Ainda faltam alguns... <br/> Mas não desanime!</FeedbackMessage></>
+            : <></>}
+            <CountText>{props.cardResult.filter(elem => elem !== 0).length}/{props.cardResult.length} CONCLUÍDOS</CountText>
             {(props.lastResult.length !== 0) &&
                 <div>
-                    {props.lastResult.map((elem) => (
-                        <img src={imagens[elem-1]}></img>
+                    {props.lastResult.map((elem, index) => (
+                        <img key={index} src={imagens[elem-1]}></img>
                     ))}
                 </div>
             }
@@ -22,7 +35,7 @@ export default function Footer(props){
 
 const ContainerFooter = styled.div`
     width: 100%;
-    height: 70px;
+    height: ${props => (props.showFeedback === 0 || props.showFeedback === 1) ? "170px" : "70px"};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,16 +45,6 @@ const ContainerFooter = styled.div`
     left: 0px;
     background-color: #FFFFFF;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-
-    p{
-        height: 22px;
-        font-family: 'Recursive', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 22px;
-        color: #333333;
-    }
 
     div{
         width: 100%;
@@ -57,3 +60,41 @@ const ContainerFooter = styled.div`
         }
     }
 `;
+
+const CountText = styled.p`
+    width: 100%;
+    height: 22px;
+    text-align: center;
+    font-family: 'Recursive', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #333333;
+`;
+
+const FeedbackTitle = styled.p`
+    width: 100%;
+    height: 22px;
+    font-family: 'Recursive';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 15px;
+`
+
+const FeedbackMessage = styled.p`
+    width: 100%;
+    height: 44px;
+    font-family: 'Recursive';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #333333;
+    margin-bottom: 14px;
+`
