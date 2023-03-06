@@ -10,6 +10,7 @@ import HomeScreen from './HomeScreen';
 export default function App() {
   const [cardState, setCardState] = useState([...cards].fill(0));
   const [cardResult, setCardResult] = useState([...cards].fill(0));
+  const [lastResult, setLastResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   return (
@@ -25,9 +26,12 @@ export default function App() {
             setCardState={setCardState}
             cardResult = {cardResult}
             setCardResult = {setCardResult}
+            lastResult = {lastResult}
+            setLastResult = {setLastResult}
         />
         <Footer
             cardResult = {cardResult}
+            lastResult = {lastResult}
         />
         </>}
       </>

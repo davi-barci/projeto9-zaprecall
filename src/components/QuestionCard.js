@@ -6,7 +6,7 @@ import iconeQuase from "../assets/icone_quase.png";
 import setaVirar from "../assets/seta_virar.png";
 
 export default function QuestionCard(props){
-    
+
     const imagens = [setaPlay, iconeErro, iconeQuase, iconeCerto];
     const dataTestImagens = ["play-btn", "no-icon", "partial-icon", "zap-icon"];
 
@@ -20,6 +20,7 @@ export default function QuestionCard(props){
         let cardArray = [...props.cardResult];
         cardArray[props.index] = result;
         props.setCardResult(cardArray);
+        props.setLastResult([...props.lastResult, result]);
         changeState(0);
     }
 

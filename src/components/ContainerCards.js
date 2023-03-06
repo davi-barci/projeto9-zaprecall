@@ -16,6 +16,8 @@ export default function ContainerCards(props){
                 setCardState = {props.setCardState}
                 cardResult = {props.cardResult}
                 setCardResult = {props.setCardResult}
+                lastResult = {props.lastResult}
+                setLastResult = {props.setLastResult}
             />)}
         </Cards>
     );
