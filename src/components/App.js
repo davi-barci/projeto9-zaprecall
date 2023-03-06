@@ -16,8 +16,8 @@ export default function App() {
   return (
       <>
       <GlobalStyle/>
-      {(currentPage === 0) ? 
-        <HomeScreen setCurrentPage={setCurrentPage}/> : 
+      {(currentPage === 0) ?
+        <HomeScreen setCurrentPage={setCurrentPage}/> :
         <>
         <Title/>
         <ContainerCards 

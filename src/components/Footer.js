@@ -85,7 +85,7 @@ const FeedbackTitle = styled.p`
     color: #333333;
     text-align: center;
     margin-bottom: 15px;
-`
+`;
 
 const FeedbackMessage = styled.p`
     width: 100%;
@@ -98,4 +98,4 @@ const FeedbackMessage = styled.p`
     text-align: center;
     color: #333333;
     margin-bottom: 14px;
-`
+`;

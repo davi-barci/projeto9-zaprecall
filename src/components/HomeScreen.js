@@ -65,4 +65,4 @@ const ContainerHomeScreen = styled.div`
             color: #D70900;
         }
     }
-`
+`;
